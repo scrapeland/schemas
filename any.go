@@ -1,9 +1,17 @@
 package schemas
 
-type Any map[string]interface{}
+type Any struct {
+	ID         string     `json:"id"`
+	SchemaType SchemaType `json:"schemaType"`
+	Source
+	Data interface{}
+}
 
-func NewAny() Any {
-	m := make(map[string]interface{})
-	m["schemaType"] = SCHEMA_TYPE_ANY
-	return Any(m)
+func NewAny(id string, source Source, data interface{}) Any {
+	return Any{
+		SchemaType: SCHEMA_TYPE_ANY,
+		ID:         id,
+		Source:     source,
+		Data:       data,
+	}
 }

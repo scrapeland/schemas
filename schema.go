@@ -53,14 +53,15 @@ func Decode(data []byte) (interface{}, error) {
 		err = mapstructure.Decode(m, &post)
 		result = post
 	case SCHEMA_TYPE_ANY:
-		m["schemaType"] = SCHEMA_TYPE_ANY
-		result = Any(m)
+		var any Any
+		err = mapstructure.Decode(m, &any)
+		result = any
 	}
 
 	return result, err
 }
 
 type Source struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID   string
+	Name string
 }

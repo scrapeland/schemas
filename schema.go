@@ -11,21 +11,8 @@ type SchemaType string
 
 const (
 	SCHEMA_TYPE_POST SchemaType = "POST"
+	SCHEMA_TYPE_ANY  SchemaType = "ANY"
 )
-
-type Post struct {
-	SchemaType SchemaType `json:"schemaType"`
-	Title      string     `json:"title"`
-	Link       string     `json:"link"`
-}
-
-func NewPost(title, link string) Post {
-	return Post{
-		SchemaType: SCHEMA_TYPE_POST,
-		Title:      title,
-		Link:       link,
-	}
-}
 
 func Decode(data []byte) (interface{}, error) {
 	m := make(map[string]interface{})
@@ -51,6 +38,9 @@ func Decode(data []byte) (interface{}, error) {
 		var post Post
 		err = mapstructure.Decode(m, &post)
 		result = post
+	case SCHEMA_TYPE_ANY:
+		m["schemaType"] = SCHEMA_TYPE_ANY
+		result = Any(m)
 	}
 
 	return result, err

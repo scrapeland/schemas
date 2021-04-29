@@ -8,8 +8,8 @@ type PostData struct {
 type Post struct {
 	ID         string     `json:"id"`
 	SchemaType SchemaType `json:"schemaType"`
-	Source
-	Data PostData
+	Source     Source
+	Data       PostData
 }
 
 func NewPost(id string, source Source, data PostData) Post {

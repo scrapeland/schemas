@@ -7,7 +7,7 @@ import (
 )
 
 func TestDecodePost(t *testing.T) {
-	data := []byte(`{"type": "POST", "title": "my title", "link": "my link"}`)
+	data := []byte(`{"schemaType": "POST", "title": "my title", "link": "my link"}`)
 	result, err := Decode(data)
 	require.NoError(t, err)
 	post, ok := result.(Post)

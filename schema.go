@@ -14,16 +14,16 @@ const (
 )
 
 type Post struct {
-	Type  SchemaType `json:"type"`
-	Title string     `json:"title"`
-	Link  string     `json:"link"`
+	SchemaType SchemaType `json:"schemaType"`
+	Title      string     `json:"title"`
+	Link       string     `json:"link"`
 }
 
 func NewPost(title, link string) Post {
 	return Post{
-		Type:  SCHEMA_TYPE_POST,
-		Title: title,
-		Link:  link,
+		SchemaType: SCHEMA_TYPE_POST,
+		Title:      title,
+		Link:       link,
 	}
 }
 
@@ -33,7 +33,7 @@ func Decode(data []byte) (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	schemaTypeIface, ok := m["type"]
+	schemaTypeIface, ok := m["schemaType"]
 	if !ok {
 		return nil, fmt.Errorf("there is no type property")
 	}

@@ -12,8 +12,16 @@ func TestDecode(t *testing.T) {
 		want interface{}
 	}{
 		{
-			data: `{"schemaType": "POST", "title": "my title", "link": "my link"}`,
-			want: NewPost("my title", "my link"),
+			data: `{
+			  "source": { "id": "1", "name": "source name" },
+			  "schemaType": "POST",
+			  "title": "my title",
+			  "link": "my link"
+			}`,
+			want: NewPost(
+				Source{ID: "1", Name: "source name"},
+				PostData{Title: "my title", Link: "my link"},
+			),
 		},
 		{
 			data: `{"schemaType": "ANY"}`,

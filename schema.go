@@ -14,6 +14,20 @@ const (
 	SCHEMA_TYPE_ANY  SchemaType = "ANY"
 )
 
+var AllSchemaTypes = []SchemaType{
+	SCHEMA_TYPE_POST,
+	SCHEMA_TYPE_ANY,
+}
+
+func (s SchemaType) IsValid() bool {
+	switch s {
+	case SCHEMA_TYPE_POST, SCHEMA_TYPE_ANY:
+		return true
+	default:
+		return false
+	}
+}
+
 func Decode(data []byte) (interface{}, error) {
 	m := make(map[string]interface{})
 	err := json.Unmarshal(data, &m)
@@ -44,4 +58,9 @@ func Decode(data []byte) (interface{}, error) {
 	}
 
 	return result, err
+}
+
+type Source struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
